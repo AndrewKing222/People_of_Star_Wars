@@ -1,0 +1,20 @@
+{
+  "name": "people_of_star_wars-server",
+  "version": "1.0.0",
+  "description": "back-end for People_of_Star_Wars app",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index"
+  },
+  "author": "Andrew King",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-datasource-rest": "^0.11.0",
+    "apollo-server-express": "^2.22.2",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
