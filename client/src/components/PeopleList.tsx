@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { PersonItem } from "./PersonItem";
+import { PersonDetails } from "./PersonDetails";
 
 // export const PERSON_TILE_DATA = gql`
 //   fragment PersonTile on Person {
@@ -32,14 +33,28 @@ const PEOPLE_LIST = gql`
   query PeopleList {
     allPeople {
       name
+      # height
+      # mass
+      # gender
+      # homeworld {
+      #   name
+      # }
+      url
     }
   }
 `;
 
+const getPersonID = (personURL: String) => {
+  let splitPersonURL = personURL.split("/");
+  return parseInt(splitPersonURL[splitPersonURL.length - 2]);
+};
+
 interface PeopleListProps {}
 
-export const PeopleList: React.FC<PeopleListProps> = ({}) => {
-  const { data, loading, error } = useQuery<any>(PEOPLE_LIST);
+export const PeopleList: React.FC<PeopleListProps> = () => {
+  const [showDetails, setShowDetails] = useState();
+
+  const { loading, error, data } = useQuery<any>(PEOPLE_LIST);
 
   if (loading) return <h4>Loading...</h4>;
   if (error) {
@@ -47,12 +62,32 @@ export const PeopleList: React.FC<PeopleListProps> = ({}) => {
     return <h4>ERROR</h4>;
   }
   if (!data) return <h4>No People found</h4>;
-  console.log(data);
+
+  //console.log(data);
+
+  // const handleShowDetails = (name: any) => {
+  //   setShowDetails(name);
+  // };
 
   return (
     <Fragment>
       {data.allPeople.map((person: any) => (
-        <PersonItem key={person.index} name={person.name} />
+        <div key={person.url}>
+          <PersonItem
+            name={person.name}
+            onClick={() => setShowDetails(person.name)}
+          />
+          {person.name === showDetails && (
+            <PersonDetails
+              id={getPersonID(person.url)}
+              // person={person}
+              // // height={person.height}
+              // // mass={person.mass}
+              // // gender={person.gender}
+              // homeworld={person.homeworld.name}
+            />
+          )}
+        </div>
       ))}
     </Fragment>
   );

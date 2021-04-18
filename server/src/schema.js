@@ -7,6 +7,7 @@ const typeDefs = gql`
   }
 
   type Person {
+    url: String!
     name: String!
     height: String
     mass: String
