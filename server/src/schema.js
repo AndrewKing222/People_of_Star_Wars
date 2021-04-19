@@ -3,6 +3,7 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
   type Query {
     allPeople: [Person!]!
+    peoplePage(page: Int!): [Person!]!
     personDetails(id: Int!): Person
   }
 

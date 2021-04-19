@@ -3,35 +3,10 @@ import { gql, useQuery } from "@apollo/client";
 import { PersonItem } from "./PersonItem";
 import { PersonDetails } from "./PersonDetails";
 
-// export const PERSON_TILE_DATA = gql`
-//   fragment PersonTile on Person {
-//     #__typename
-//     name
-//     height
-//     mass
-//     gender
-//     homeworld {
-//       name
-//     }
-//   }
-// `;
-
-// export const GET_PEOPLE = gql`
-//   query AllPeople($after: String) {
-//     people(after: $after) {
-//       cursor
-//       hasMore
-//       people {
-//         ...PersonTile
-//       }
-//     }
-//   }
-//   ${PERSON_TILE_DATA}
-// `;
-
 const PEOPLE_LIST = gql`
-  query PeopleList {
-    allPeople {
+  query PeopleList($page: Int!) {
+    peoplePage(page: $page) {
+      url
       name
       # height
       # mass
@@ -39,7 +14,6 @@ const PEOPLE_LIST = gql`
       # homeworld {
       #   name
       # }
-      url
     }
   }
 `;
@@ -49,12 +23,16 @@ const getPersonID = (personURL: String) => {
   return parseInt(splitPersonURL[splitPersonURL.length - 2]);
 };
 
-interface PeopleListProps {}
+interface PeopleListProps {
+  page: number;
+}
 
-export const PeopleList: React.FC<PeopleListProps> = () => {
+export const PeopleList: React.FC<PeopleListProps> = ({ page }) => {
   const [showDetails, setShowDetails] = useState();
 
-  const { loading, error, data } = useQuery<any>(PEOPLE_LIST);
+  const { loading, error, data } = useQuery<any>(PEOPLE_LIST, {
+    variables: { page },
+  });
 
   if (loading) return <h4>Loading...</h4>;
   if (error) {
@@ -65,13 +43,9 @@ export const PeopleList: React.FC<PeopleListProps> = () => {
 
   //console.log(data);
 
-  // const handleShowDetails = (name: any) => {
-  //   setShowDetails(name);
-  // };
-
   return (
     <Fragment>
-      {data.allPeople.map((person: any) => (
+      {data.peoplePage.map((person: any) => (
         <div key={person.url}>
           <PersonItem
             name={person.name}
