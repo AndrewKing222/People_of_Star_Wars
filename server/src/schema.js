@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     allPeople: [Person!]!
     peoplePage(page: Int!): [Person!]!
+    peopleSearch(search: String!): [Person!]!
     personDetails(id: Int!): Person
   }
 

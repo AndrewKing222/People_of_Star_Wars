@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface PaginationProps {
   setSelectedPage: any;
@@ -14,11 +14,11 @@ export const Pagination: React.FC<PaginationProps> = ({ setSelectedPage }) => {
   return (
     <div>
       <ul className="pagination justify-content-center">
-        <li className="page-item disabled">
+        {/* <li className="page-item disabled">
           <a className="page-link" href="#">
             Previous
           </a>
-        </li>
+        </li> */}
         <li className="page-item">
           <button className="page-link" onClick={() => onPageChange(1)}>
             1
@@ -64,11 +64,11 @@ export const Pagination: React.FC<PaginationProps> = ({ setSelectedPage }) => {
             9
           </button>
         </li>
-        <li className="page-item">
+        {/* <li className="page-item">
           <a className="page-link" href="#">
             Next
           </a>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

@@ -3,17 +3,11 @@ import { gql, useQuery } from "@apollo/client";
 import { PersonItem } from "./PersonItem";
 import { PersonDetails } from "./PersonDetails";
 
-const PEOPLE_LIST = gql`
-  query PeopleList($page: Int!) {
-    peoplePage(page: $page) {
+const PEOPLE_SEARCH = gql`
+  query PeopleSearch($search: String!) {
+    peopleSearch(search: $search) {
       url
       name
-      # height
-      # mass
-      # gender
-      # homeworld {
-      #   name
-      # }
     }
   }
 `;
@@ -23,15 +17,15 @@ const getPersonID = (personURL: String) => {
   return parseInt(splitPersonURL[splitPersonURL.length - 2]);
 };
 
-interface PeopleListProps {
-  page: number;
+interface PeopleSearchProps {
+  search: String;
 }
 
-export const PeopleList: React.FC<PeopleListProps> = ({ page }) => {
+export const PeopleSearch: React.FC<PeopleSearchProps> = ({ search }) => {
   const [showDetails, setShowDetails] = useState();
 
-  const { loading, error, data } = useQuery<any>(PEOPLE_LIST, {
-    variables: { page },
+  const { loading, error, data } = useQuery<any>(PEOPLE_SEARCH, {
+    variables: { search },
   });
 
   if (loading)
@@ -48,21 +42,14 @@ export const PeopleList: React.FC<PeopleListProps> = ({ page }) => {
 
   return (
     <Fragment>
-      {data.peoplePage.map((person: any) => (
+      {data.peopleSearch.map((person: any) => (
         <div key={person.url}>
           <PersonItem
             name={person.name}
             onClick={() => setShowDetails(person.name)}
           />
           {person.name === showDetails && (
-            <PersonDetails
-              id={getPersonID(person.url)}
-              // person={person}
-              // // height={person.height}
-              // // mass={person.mass}
-              // // gender={person.gender}
-              // homeworld={person.homeworld.name}
-            />
+            <PersonDetails id={getPersonID(person.url)} />
           )}
         </div>
       ))}

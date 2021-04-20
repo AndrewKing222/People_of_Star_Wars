@@ -6,6 +6,9 @@ const resolvers = {
     peoplePage: (_, { page }, { dataSources }) => {
       return dataSources.starWarsAPI.getPeoplePage(page);
     },
+    peopleSearch: (_, { search }, { dataSources }) => {
+      return dataSources.starWarsAPI.getPeopleSearch(search);
+    },
     personDetails: (_, { id }, { dataSources }) => {
       return dataSources.starWarsAPI.getPerson(id);
     },

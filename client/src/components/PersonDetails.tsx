@@ -37,7 +37,12 @@ export const PersonDetails: React.FC<PersonDetailsProps> = ({ id }) =>
       variables: { id },
     });
 
-    if (loading) return <h5>Loading...</h5>;
+    if (loading)
+      return (
+        <div className="d-flex justify-content-center mb-3">
+          <div className="spinner-border" role="status"></div>
+        </div>
+      );
     if (error) {
       console.log(error);
       return <h5>ERROR</h5>;
