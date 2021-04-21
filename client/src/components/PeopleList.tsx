@@ -53,6 +53,7 @@ export const PeopleList: React.FC<PeopleListProps> = ({ page }) => {
           <PersonItem
             name={person.name}
             onClick={() => setShowDetails(person.name)}
+            activeItem={showDetails}
           />
           {person.name === showDetails && (
             <PersonDetails

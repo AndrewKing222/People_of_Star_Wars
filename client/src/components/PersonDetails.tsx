@@ -1,5 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
+import { Wrapper } from "./PersonDetails.styles";
 
 const PERSON_DETAILS = gql`
   query PersonDetails($id: Int!) {
@@ -52,15 +53,13 @@ export const PersonDetails: React.FC<PersonDetailsProps> = ({ id }) =>
     const { height, mass, gender, homeworld } = data.personDetails;
 
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-9">
-            <p>Height: {height}</p>
-            <p>Mass: {mass}</p>
-            <p>Gender: {gender}</p>
-            <p>Homeworld: {homeworld.name}</p>
-          </div>
+      <Wrapper>
+        <div className="col">
+          <p>Height: {height} cm</p>
+          <p>Mass: {mass} kg</p>
+          <p>Gender: {gender}</p>
+          <p>Homeworld: {homeworld.name}</p>
         </div>
-      </div>
+      </Wrapper>
     );
   };

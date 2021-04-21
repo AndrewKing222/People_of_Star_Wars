@@ -47,6 +47,7 @@ export const PeopleSearch: React.FC<PeopleSearchProps> = ({ search }) => {
           <PersonItem
             name={person.name}
             onClick={() => setShowDetails(person.name)}
+            activeItem={showDetails}
           />
           {person.name === showDetails && (
             <PersonDetails id={getPersonID(person.url)} />
