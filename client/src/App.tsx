@@ -17,7 +17,7 @@ const App = () => {
           <Title>People of Star Wars</Title>
           <Search setSearchInput={setSearchInput} />
         </div>
-        {searchInput == "" ? (
+        {searchInput === "" ? (
           <>
             <PeopleList page={selectedPage} />
             <Pagination setSelectedPage={setSelectedPage} />
