@@ -17,10 +17,10 @@ const server = new ApolloServer({
 const app = express();
 server.applyMiddleware({ app });
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 const PORT = process.env.PORT || 5000;

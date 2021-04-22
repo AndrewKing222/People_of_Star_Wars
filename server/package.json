@@ -4,7 +4,8 @@
   "description": "back-end for People_of_Star_Wars app",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index"
+    "start": "nodemon src/index",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Andrew King",
   "license": "ISC",
