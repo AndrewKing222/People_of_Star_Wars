@@ -4,8 +4,8 @@
   "description": "back-end for People_of_Star_Wars app",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "heroku-postbuild": "cd ../client && npm install && npm run build"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Andrew King",
   "license": "ISC",
