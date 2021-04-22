@@ -13,24 +13,6 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   uri: "http://localhost:4000/graphql",
 });
 
-// client
-//   .query({
-//     query: gql`
-//       query TestQuery {
-//         personDetails(id: 2) {
-//           name
-//           height
-//           mass
-//           gender
-//           homeworld {
-//             name
-//           }
-//         }
-//       }
-//     `,
-//   })
-//   .then((result) => console.log(result));
-
 ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
